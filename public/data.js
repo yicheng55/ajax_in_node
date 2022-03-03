@@ -88,7 +88,8 @@ $(document).ready(function(){
                             // console.log("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;&nbsp;&nbsp;" + "<button class='edit' value='" + data._id + "'> edit </button>" +"</td></tr>");
                             $('tbody').append("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;&nbsp;&nbsp;" + "<button class='edit' value='" + data._id + "'> edit </button>" +"</td></tr>");
                             });
-                            console.log($('tbody').html());
+                            // console.log($('tbody').html());
+                            $("#div1").html($('tbody').html());
                     }
                 }
             },
