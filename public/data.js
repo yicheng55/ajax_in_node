@@ -85,8 +85,10 @@ $(document).ready(function(){
                         $.each(response.data,function(index,data){
                             var url = url+data._id;
                             index+=1;
-                            $('tbody').append("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;" + "<button class='edit' value='" + data._id + "'>edit</button>" +"</td></tr>");
+                            // console.log("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;&nbsp;&nbsp;" + "<button class='edit' value='" + data._id + "'> edit </button>" +"</td></tr>");
+                            $('tbody').append("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;&nbsp;&nbsp;" + "<button class='edit' value='" + data._id + "'> edit </button>" +"</td></tr>");
                             });
+                            console.log($('tbody').html());
                     }
                 }
             },
