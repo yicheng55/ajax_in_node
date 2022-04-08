@@ -50,24 +50,45 @@ $(document).ready(function() {
 
     $(document).on('click', 'button.edit', function() {
         var id = $(this).parent().find('button.edit').val();
+        var task = $("#task").val();
         alert('edit: ' + id)
-            // $.ajax({
-            //     url:'/task/removetask',
-            //     method:'delete',
-            //     dataType:'json',
-            //     data:{'id':id},
-            //     success:function(response){
-            //         if(response.msg=='success'){
-            //             alert('data deleted');
-            //             getdata();
-            //         }else{
-            //             alert('data not get deleted');
-            //         }
-            //     },
-            //     error:function(response){
-            //         alert('server error')
-            //     }
-            // });
+        $.ajax({
+            url: '/task/addtask',
+            method: 'post',
+            dataType: 'json',
+            data: { 'task': task },
+            success: function(response) {
+                if (response.msg == 'success') {
+                    //    $("#task").remove();
+                    alert('task added successfully');
+                    getdata();
+                    $('#task').val('')
+                } else {
+                    alert('some error occurred try again');
+                }
+            },
+            error: function(response) {
+                alert('server error occured')
+            }
+        });
+
+        // $.ajax({
+        //     url:'/task/removetask',
+        //     method:'delete',
+        //     dataType:'json',
+        //     data:{'id':id},
+        //     success:function(response){
+        //         if(response.msg=='success'){
+        //             alert('data deleted');
+        //             getdata();
+        //         }else{
+        //             alert('data not get deleted');
+        //         }
+        //     },
+        //     error:function(response){
+        //         alert('server error')
+        //     }
+        // });
     });
 
     function getdata() {
