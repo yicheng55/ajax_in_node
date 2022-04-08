@@ -1,96 +1,96 @@
-$(document).ready(function(){
+$(document).ready(function() {
     alert('application started');
 
     getdata();
 
-    $('.addbtn').click(function(){
+    $('.addbtn').click(function() {
         var task = $("#task").val();
         $.ajax({
-            url:'/task/addtask',
-            method:'post',
-            dataType:'json',
-            data:{'task':task},
-            success:function(response){
-                if(response.msg=='success'){
-                //    $("#task").remove();
-                alert('task added successfully');
-                getdata();
-                $('#task').val('')
-                }else{
+            url: '/task/addtask',
+            method: 'post',
+            dataType: 'json',
+            data: { 'task': task },
+            success: function(response) {
+                if (response.msg == 'success') {
+                    //    $("#task").remove();
+                    alert('task added successfully');
+                    getdata();
+                    $('#task').val('')
+                } else {
                     alert('some error occurred try again');
                 }
             },
-            error:function(response){
+            error: function(response) {
                 alert('server error occured')
             }
         });
     });
 
-    $(document).on('click','button.del',function(){
+    $(document).on('click', 'button.del', function() {
         var id = $(this).parent().find('button.del').val();
         // alert('edit: ' + id)
         $.ajax({
-            url:'/task/removetask',
-            method:'delete',
-            dataType:'json',
-            data:{'id':id},
-            success:function(response){
-                if(response.msg=='success'){
+            url: '/task/removetask',
+            method: 'delete',
+            dataType: 'json',
+            data: { 'id': id },
+            success: function(response) {
+                if (response.msg == 'success') {
                     alert('data deleted');
                     getdata();
-                }else{
+                } else {
                     alert('data not get deleted');
                 }
             },
-            error:function(response){
+            error: function(response) {
                 alert('server error')
             }
         });
     });
 
-    $(document).on('click','button.edit',function(){
+    $(document).on('click', 'button.edit', function() {
         var id = $(this).parent().find('button.edit').val();
         alert('edit: ' + id)
-        // $.ajax({
-        //     url:'/task/removetask',
-        //     method:'delete',
-        //     dataType:'json',
-        //     data:{'id':id},
-        //     success:function(response){
-        //         if(response.msg=='success'){
-        //             alert('data deleted');
-        //             getdata();
-        //         }else{
-        //             alert('data not get deleted');
-        //         }
-        //     },
-        //     error:function(response){
-        //         alert('server error')
-        //     }
-        // });
+            // $.ajax({
+            //     url:'/task/removetask',
+            //     method:'delete',
+            //     dataType:'json',
+            //     data:{'id':id},
+            //     success:function(response){
+            //         if(response.msg=='success'){
+            //             alert('data deleted');
+            //             getdata();
+            //         }else{
+            //             alert('data not get deleted');
+            //         }
+            //     },
+            //     error:function(response){
+            //         alert('server error')
+            //     }
+            // });
     });
 
-    function getdata(){
+    function getdata() {
         $.ajax({
-            url:'/task/gettask',
-            method:'get',
-            dataType:'json',
-            success:function(response){
-                if(response.msg=='success'){
+            url: '/task/gettask',
+            method: 'get',
+            dataType: 'json',
+            success: function(response) {
+                if (response.msg == 'success') {
                     $('tr.taskrow').remove()
-                    if(response.data==undefined || response.data==null || response.data==''){
+                    if (response.data == undefined || response.data == null || response.data == '') {
                         $('.tblData').hide();
-                    }else{
+                    } else {
                         $('.tblData').show();
-                        $.each(response.data,function(index,data){
-                            var url = url+data._id;
-                            index+=1;
-                            $('tbody').append("<tr class='taskrow'><td>" + index + "</td><td>" + data.task+ "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;" + "<button class='edit' value='" + data._id + "'>edit</button>" +"</td></tr>");
-                            });
+                        $.each(response.data, function(index, data) {
+                            var url = url + data._id;
+                            index += 1;
+                            $('tbody').append("<tr class='taskrow'><td>" + index + "</td><td>" + data.task + "</td><td>" + "<button class='del' value='" + data._id + "'>delete</button>" + "&nbsp;&nbsp;&nbsp;" + "<button class='edit' value='" + data._id + "'>edit</button>" + "</td></tr>");
+                        });
                     }
                 }
             },
-            error:function(response){
+            error: function(response) {
                 alert('server error');
             }
         });
